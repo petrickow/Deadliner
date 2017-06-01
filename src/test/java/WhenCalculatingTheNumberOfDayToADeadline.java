@@ -18,12 +18,10 @@ public class WhenCalculatingTheNumberOfDayToADeadline {
     @Before
     public void Setup() {
 
-        /*
-        Stortingsvalg 11. september
-         */
-
         startDate = LocalDate.of(2018, Month.SEPTEMBER, 6);
         stopDate = LocalDate.of(2018, Month.SEPTEMBER, 13);
+
+
         ignoringWeekendAndHoliday = DeadlineCalculator.daysUntilDeadline(startDate, stopDate, true, true);
         ignoringWeekend = DeadlineCalculator.daysUntilDeadline(startDate, stopDate, true, false);
         ignoringHoliday = DeadlineCalculator.daysUntilDeadline(startDate, stopDate, false, true);
