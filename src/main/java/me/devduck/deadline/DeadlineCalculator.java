@@ -26,7 +26,9 @@ public class DeadlineCalculator {
       hardcoded: Stortingsvalg 11. september 2018
      */
     private static boolean isHoliday(LocalDate date) {
-        // very temporary implementation
+        // very temporary implementation --> create a set with holidays, things to consider:
+        //                  * localization, national holidays
+        //                  * size? should we cache _all_ the holidays, or get holidays for all days between two given dates?
         if (date.isEqual(LocalDate.of(2018, Month.SEPTEMBER, 11))) {
             return true;
         }
@@ -40,7 +42,11 @@ public class DeadlineCalculator {
                 date.getDayOfWeek() == DayOfWeek.SUNDAY;
     }
 
-    /*** Kunne brukt denne for å ***/
+
+    /***
+     * Kunne brukt denne, skrevet om til fungerende method.
+     * Inkluderer startdato, eksluderer sluttdato
+     * ***/
     public static ArrayList<LocalDate> getDatesBetween(LocalDate startDate, LocalDate endDate) {
 
         ArrayList<LocalDate> dates = new ArrayList<>(); // does not have the size, use dynamic list
@@ -58,20 +64,18 @@ public class DeadlineCalculator {
     /*
     public static LocalDate[] getDatesBetween(LocalDate startDate, LocalDate endDate) {
 
-        //LocalDate[] dates = new LocalDate[]; // missing size
+        LocalDate[] dates = new LocalDate[]; // missing size in initializer
 
         LocalDate currentDate = startDate.plusDays(1);
 
         // if we pass invalid dates the loop does not exit, even if comparator would have worked
 
-        // comparator is not valid for our purpose
-        while (currentDate != endDate) { // assumes LocalDate implements comparable, LocalDate
-            //dates.add(currentDate); // array has no add <-- use list or index
+        // comparator is not valid for comparing dates (isEqual, isBefore, isAfter java.date)
+        while (currentDate != endDate) {
+            dates.add(currentDate); // java primitive array has no methods (including add) <-- use list or index
             currentDate = currentDate.plusDays(1);
         }
-
         return dates;
     }
     */
-
 }
